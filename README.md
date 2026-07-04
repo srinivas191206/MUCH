@@ -1,43 +1,45 @@
-# Much 🌌 — The Local-First Developer's AI Workspace
+<p align="center">
+  <img src="public/logo.png" width="130" alt="Much Logo" />
+</p>
 
-A professional-grade, privacy-focused AI workspace that unifies cloud and local models inside a single, premium web interface. 
+<h1 align="center">Much</h1>
 
-While platforms like **LibreChat** require heavy server-side Docker containers to run agent tools and code execution, **Much** is engineered for a **local-first, lightweight footprint**—running secure code interpretation, vector calculations, and database integrations directly inside the client context.
+<p align="center">
+  <b>A premium self-hosted AI workspace that unifies all major cloud and local AI providers in a single, privacy-focused interface.</b>
+</p>
+
+<p align="center">
+  <a href="https://github.com/srinivas191206/MUCH/blob/main/LICENSE">
+    <img src="https://img.shields.io/badge/LICENSE-MIT-green.svg?style=for-the-badge" alt="License" />
+  </a>
+  <a href="https://github.com/srinivas191206/MUCH">
+    <img src="https://img.shields.io/badge/PRs-WELCOME-blue.svg?style=for-the-badge" alt="PRs Welcome" />
+  </a>
+  <a href="https://github.com/srinivas191206/MUCH">
+    <img src="https://img.shields.io/badge/DEPLOY%20TO-RAILWAY-0B0D0E?style=for-the-badge&logo=railway" alt="Deploy to Railway" />
+  </a>
+  <a href="https://github.com/srinivas191206/MUCH">
+    <img src="https://img.shields.io/badge/DEPLOY%20TO-RENDER-4642b4?style=for-the-badge&logo=render" alt="Deploy to Render" />
+  </a>
+</p>
 
 ---
 
-## 🆚 Much vs. LibreChat: Core Comparison
-
-| Feature | Much (Our App) | LibreChat |
-| :--- | :--- | :--- |
-| **Model Hosting** | Cloud (Gemini, Groq, OpenRouter) & Local (Ollama) | Cloud (OpenAI, Anthropic, Bedrock) & Local (Ollama, llama.cpp) |
-| **Code Interpreter** | **Local-First Wasm**: Runs Python, Pandas, and Matplotlib inside your browser (Pyodide) with zero server load. | **Server-Side**: Requires external Docker containers, sandboxes, and databases (ClickHouse). |
-| **Image Generation** | Stable Diffusion XL (Keyless & Free option) + DALL-E 3 (Paid option). | DALL-E 3 (Paid only) or custom MCP server configurations. |
-| **Vector RAG** | **Local Embeddings**: Files (PDFs, CSVs, TXT) are read and searched locally using browser-based vector matching. | **Server-Side**: Requires hosting an external RAG API container. |
-| **Integrations** | Native Model Context Protocol (MCP) clients for databases and filesystems. | Advanced MCP support, presets, and customized prompt libraries. |
-| **Interface** | Sleek modern bento layout with sun/moon theme triggers. | Standard ChatGPT-style interface with customizable dropdowns. |
+Beyond a standard chat interface, **Much** provides a lightweight, local-first footprint. While other self-hosted platforms require massive Docker containers for code sandboxes or vector databases, Much runs secure Python calculations and document semantic search directly inside your web browser.
 
 ---
 
-## 🎨 Feature Summary
+## ✨ Features
 
-### 🧠 Unified Models Hub
-Hot-swap between model providers (Gemini 2.5 Flash, Llama 3.3, DeepSeek R1, or local Ollama instances) mid-conversation. Adjust parameters like Temperature, Top P, and Max Tokens live inside the parameters panel.
-
-### 🖥️ In-Browser Python Sandbox
-Write and run Python scripts securely. The integrated Pyodide compiler loads `numpy`, `pandas`, and captures `matplotlib` figures directly in the chat preview panel—running completely offline in WebAssembly.
-
-### 🪄 Generative UI & Artifacts
-Build and run live React components, static HTML pages, and Mermaid flow diagrams side-by-side. Code in the chat window, compile instantly in the preview panel, and copy cleaner files with one click.
-
-### 🔌 MCP Ecosystem
-Connect models directly to local SQLite databases, filesystem paths, and Git repositories using standard Model Context Protocol servers.
-
-### 📂 Multi-File Batch RAG
-Drag-and-drop spreadsheets, PDFs, or JSON files. Much indexes documents locally to find the most relevant context blocks before injecting them into prompts.
-
-### 🔒 Privacy-First Database
-User settings, key overrides, and chat histories are saved locally inside your private MongoDB instance, ensuring your conversations are never read by third-party database brokers.
+*   **🖥️ ChatGPT-Inspired Workspace**: A premium interface built with modern glassmorphism, responsive drawers, and global theme triggers.
+*   **🧠 Unified Models Hub**: Hot-swap between model providers (Gemini, Groq, OpenRouter, or local Ollama instances) mid-conversation.
+*   **🖥️ In-Browser Python Sandbox**: Run Python scripts, analyze dataframes with Pandas, and render interactive Matplotlib plots directly in your browser. Powered by Pyodide WebAssembly.
+*   **🪄 Generative UI & Code Artifacts**: Real-time rendering and hot-swapping of React components, static HTML pages, and Mermaid flow diagrams.
+*   **🔌 Model Context Protocol (MCP)**: Native edge integration connecting models directly to filesystem paths, databases, and third-party APIs.
+*   **📂 Multi-File Batch RAG**: Upload spreadsheets, PDFs, or text documents and calculate cosine similarity embeddings locally for instant context retrieval.
+*   **🎨 Image Generation & Editing**: Safe, offline Stable Diffusion XL (SDXL) image generation with progressive loading spinners and permanent URL locking.
+*   **👥 Secure Access**: Full-page OAuth2 credentials authentication (Google & GitHub) with session state management.
+*   **🔒 Local Privacy Memory**: Conversational memory and credentials encrypted locally and saved to MongoDB.
 
 ---
 
@@ -48,7 +50,7 @@ User settings, key overrides, and chat histories are saved locally inside your p
 *   MongoDB (running locally on port 27017)
 
 ### 1. Installation
-Clone the repository and install the dependencies:
+Clone the repository and install dependencies:
 ```bash
 git clone https://github.com/srinivas191206/MUCH.git
 cd MUCH
