@@ -45,17 +45,16 @@ export default function LandingPage() {
   };
 
   const handleTryDemo = async () => {
-    // Instantly log in using a mock guest session for users to try out the app
     try {
       const mockEmail = 'guest@much.ai';
       const mockPassword = 'sociallogin123';
-      let success = await login(mockEmail, mockPassword);
-      if (!success) {
+      try {
+        await login(mockEmail, mockPassword);
+      } catch (loginErr) {
         await signup(mockEmail, mockPassword);
       }
     } catch (err) {
       console.error('Demo login error:', err);
-      // Fallback redirect
       setIsAuthOpen(true);
     }
   };
