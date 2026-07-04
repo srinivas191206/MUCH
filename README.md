@@ -1,46 +1,58 @@
-# Much 🌌
+# Much 🌌 — The Local-First Developer's AI Workspace
 
-A professional-grade, local-first AI workspace featuring sandboxed WebAssembly execution, multi-model hot-swapping, vector RAG pipelines, and Model Context Protocol (MCP) integrations.
+A professional-grade, privacy-focused AI workspace that unifies cloud and local models inside a single, premium web interface. 
 
-![Much Preview Workspace](src/assets/preview.png)
-
----
-
-## Key Features
-
-*   🧠 **Unified Models Hub**: Hot-swap between Gemini, Groq, OpenRouter, and local Ollama models in a single conversation thread.
-*   🖥️ **Pyodide Wasm Sandbox**: Run Python scripts, analyze dataframes with Pandas, and render interactive Matplotlib plots directly in your browser.
-*   📦 **Live Coding Artifacts**: Real-time rendering of React widgets, HTML pages, and Mermaid flow diagrams.
-*   🔌 **Model Context Protocol (MCP)**: Native edge integration connecting models directly to filesystem paths, databases, and third-party APIs.
-*   📂 **Semantic Batch RAG**: Upload multiple files (PDFs, CSVs, TXT) for parallel local cosine-similarity vector queries.
-*   🔒 **Local Privacy Memory**: Encrypted settings and chat history stored securely in your local MongoDB instance.
-*   🎨 **Sleek Bento Design**: Gorgeous, glassmorphic bento-grid feature console with adaptive light and dark themes.
+While platforms like **LibreChat** require heavy server-side Docker containers to run agent tools and code execution, **Much** is engineered for a **local-first, lightweight footprint**—running secure code interpretation, vector calculations, and database integrations directly inside the client context.
 
 ---
 
-## Tech Stack
+## 🆚 Much vs. LibreChat: Core Comparison
 
-*   **Frontend**: React (Vite), React Router, Lucide Icons, Pyodide Wasm
-*   **Styling**: Vanilla CSS, Glassmorphic Design Tokens
-*   **Backend**: Node.js, Express, MongoDB
+| Feature | Much (Our App) | LibreChat |
+| :--- | :--- | :--- |
+| **Model Hosting** | Cloud (Gemini, Groq, OpenRouter) & Local (Ollama) | Cloud (OpenAI, Anthropic, Bedrock) & Local (Ollama, llama.cpp) |
+| **Code Interpreter** | **Local-First Wasm**: Runs Python, Pandas, and Matplotlib inside your browser (Pyodide) with zero server load. | **Server-Side**: Requires external Docker containers, sandboxes, and databases (ClickHouse). |
+| **Image Generation** | Stable Diffusion XL (Keyless & Free option) + DALL-E 3 (Paid option). | DALL-E 3 (Paid only) or custom MCP server configurations. |
+| **Vector RAG** | **Local Embeddings**: Files (PDFs, CSVs, TXT) are read and searched locally using browser-based vector matching. | **Server-Side**: Requires hosting an external RAG API container. |
+| **Integrations** | Native Model Context Protocol (MCP) clients for databases and filesystems. | Advanced MCP support, presets, and customized prompt libraries. |
+| **Interface** | Sleek modern bento layout with sun/moon theme triggers. | Standard ChatGPT-style interface with customizable dropdowns. |
 
 ---
 
-## Quickstart Setup
+## 🎨 Feature Summary
+
+### 🧠 Unified Models Hub
+Hot-swap between model providers (Gemini 2.5 Flash, Llama 3.3, DeepSeek R1, or local Ollama instances) mid-conversation. Adjust parameters like Temperature, Top P, and Max Tokens live inside the parameters panel.
+
+### 🖥️ In-Browser Python Sandbox
+Write and run Python scripts securely. The integrated Pyodide compiler loads `numpy`, `pandas`, and captures `matplotlib` figures directly in the chat preview panel—running completely offline in WebAssembly.
+
+### 🪄 Generative UI & Artifacts
+Build and run live React components, static HTML pages, and Mermaid flow diagrams side-by-side. Code in the chat window, compile instantly in the preview panel, and copy cleaner files with one click.
+
+### 🔌 MCP Ecosystem
+Connect models directly to local SQLite databases, filesystem paths, and Git repositories using standard Model Context Protocol servers.
+
+### 📂 Multi-File Batch RAG
+Drag-and-drop spreadsheets, PDFs, or JSON files. Much indexes documents locally to find the most relevant context blocks before injecting them into prompts.
+
+### 🔒 Privacy-First Database
+User settings, key overrides, and chat histories are saved locally inside your private MongoDB instance, ensuring your conversations are never read by third-party database brokers.
+
+---
+
+## 🚀 Setup & Execution
 
 ### Prerequisites
+*   Node.js (v18+)
+*   MongoDB (running locally on port 27017)
 
-Ensure you have [Node.js](https://nodejs.org/) (v18+) and [MongoDB](https://www.mongodb.com/) installed and running locally.
-
-### 1. Clone the Repository
+### 1. Installation
+Clone the repository and install the dependencies:
 ```bash
-git clone https://github.com/YOUR_USERNAME/much.git
-cd much
-```
+git clone https://github.com/srinivas191206/MUCH.git
+cd MUCH
 
-### 2. Install Dependencies
-Install packages for both the client application and backend server:
-```bash
 # Install frontend dependencies
 npm install
 
@@ -50,38 +62,30 @@ npm install
 cd ..
 ```
 
-### 3. Configure Environment Variables
-Create a `.env` file in the `server` directory:
-```bash
-touch server/.env
-```
-Add your credentials:
+### 2. Environment Variables
+Create a `server/.env` file with your credentials (this is safely ignored by Git):
 ```env
 PORT=5000
 MONGODB_URI=mongodb://localhost:27017/much
-JWT_SECRET=YOUR_SUPER_SECRET_KEY
+JWT_SECRET=your_secret_signature
 
-# Google OAuth Credentials
-GOOGLE_CLIENT_ID=your_google_id
-GOOGLE_CLIENT_SECRET=your_google_secret
-
-# GitHub OAuth Credentials
-GITHUB_CLIENT_ID=your_github_id
-GITHUB_CLIENT_SECRET=your_github_secret
+# Social Login Integrations
+GOOGLE_CLIENT_ID=your_id.apps.googleusercontent.com
+GOOGLE_CLIENT_SECRET=your_secret
+GITHUB_CLIENT_ID=your_id
+GITHUB_CLIENT_SECRET=your_secret
 ```
 
-### 4. Run Locally
-Start the server and frontend dashboard concurrently:
+### 3. Start Development Servers
 ```bash
-# Start backend server (runs on port 5000)
+# Start backend server
 npm run server
 
-# Start frontend dashboard (runs on port 5173)
+# Start frontend client
 npm run dev
 ```
 
 ---
 
-## License
-
-Distributed under the MIT License. See `LICENSE` for more information.
+## 📜 License
+Distributed under the MIT License.
