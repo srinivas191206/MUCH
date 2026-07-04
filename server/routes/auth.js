@@ -120,7 +120,8 @@ router.get('/me', verifyToken, async (req, res) => {
 // Google OAuth Redirect
 router.get('/google', (req, res) => {
   const clientId = process.env.GOOGLE_CLIENT_ID || '';
-  const redirectUri = 'http://localhost:5001/api/auth/google/callback';
+  const backendUrl = process.env.BACKEND_URL || 'http://localhost:5001';
+  const redirectUri = `${backendUrl}/api/auth/google/callback`;
   const url = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${encodeURIComponent(redirectUri)}&response_type=code&scope=email%20profile`;
   res.redirect(url);
 });
@@ -128,7 +129,8 @@ router.get('/google', (req, res) => {
 // GitHub OAuth Redirect
 router.get('/github', (req, res) => {
   const clientId = process.env.GITHUB_CLIENT_ID || '';
-  const redirectUri = 'http://localhost:5001/api/auth/github/callback';
+  const backendUrl = process.env.BACKEND_URL || 'http://localhost:5001';
+  const redirectUri = `${backendUrl}/api/auth/github/callback`;
   const url = `https://github.com/login/oauth/authorize?client_id=${clientId}&redirect_uri=${encodeURIComponent(redirectUri)}&scope=user:email`;
   res.redirect(url);
 });
@@ -141,6 +143,9 @@ router.get('/google/callback', async (req, res) => {
       return res.status(400).send('Google OAuth authorization code is missing.');
     }
 
+    const backendUrl = process.env.BACKEND_URL || 'http://localhost:5001';
+    const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:5173';
+
     // Exchange code for Google Access Token
     const tokenResponse = await fetch('https://oauth2.googleapis.com/token', {
       method: 'POST',
@@ -149,7 +154,7 @@ router.get('/google/callback', async (req, res) => {
         code,
         client_id: process.env.GOOGLE_CLIENT_ID || '',
         client_secret: process.env.GOOGLE_CLIENT_SECRET || '',
-        redirect_uri: 'http://localhost:5001/api/auth/google/callback',
+        redirect_uri: `${backendUrl}/api/auth/google/callback`,
         grant_type: 'authorization_code'
       })
     });
@@ -188,7 +193,7 @@ router.get('/google/callback', async (req, res) => {
 
     // Generate system JWT and redirect back to client dashboard
     const token = generateToken(user._id);
-    res.redirect(`http://localhost:5173/?token=${token}`);
+    res.redirect(`${frontendUrl}/?token=${token}`);
   } catch (error) {
     console.error('Google OAuth error:', error);
     res.status(500).send('Authentication failed due to a server error.');
@@ -203,6 +208,9 @@ router.get('/github/callback', async (req, res) => {
       return res.status(400).send('GitHub OAuth authorization code is missing.');
     }
 
+    const backendUrl = process.env.BACKEND_URL || 'http://localhost:5001';
+    const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:5173';
+
     // Exchange code for GitHub Access Token
     const tokenResponse = await fetch('https://github.com/login/oauth/access_token', {
       method: 'POST',
@@ -214,7 +222,7 @@ router.get('/github/callback', async (req, res) => {
         client_id: process.env.GITHUB_CLIENT_ID || '',
         client_secret: process.env.GITHUB_CLIENT_SECRET || '',
         code,
-        redirect_uri: 'http://localhost:5001/api/auth/github/callback'
+        redirect_uri: `${backendUrl}/api/auth/github/callback`
       })
     });
 
@@ -271,7 +279,7 @@ router.get('/github/callback', async (req, res) => {
 
     // Generate system JWT and redirect back to client dashboard
     const token = generateToken(user._id);
-    res.redirect(`http://localhost:5173/?token=${token}`);
+    res.redirect(`${frontendUrl}/?token=${token}`);
   } catch (error) {
     console.error('GitHub OAuth error:', error);
     res.status(500).send('Authentication failed due to a server error.');
