@@ -859,8 +859,21 @@ export function AppProvider({ children }) {
       timestamp: new Date().toISOString()
     };
 
-    const activeChat = chats.find(c => c.id === chatId);
-    if (!activeChat) return;
+    let activeChat = chats.find(c => c.id === chatId);
+    let currentChats = chats;
+    if (!activeChat) {
+      activeChat = {
+        id: chatId,
+        title: 'New Conversation',
+        folderId: null,
+        isFavorite: false,
+        messages: [],
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString()
+      };
+      currentChats = [activeChat, ...chats];
+      syncChat(activeChat);
+    }
 
     const history = [...activeChat.messages, userMsg];
 
@@ -902,7 +915,7 @@ export function AppProvider({ children }) {
 
       const reorderedChats = [
         updatedChat,
-        ...chats.filter(c => c.id !== chatId)
+        ...currentChats.filter(c => c.id !== chatId)
       ];
       setChats(reorderedChats);
 
@@ -930,7 +943,7 @@ export function AppProvider({ children }) {
 
       const reorderedChats = [
         updatedChat,
-        ...chats.filter(c => c.id !== chatId)
+        ...currentChats.filter(c => c.id !== chatId)
       ];
       setChats(reorderedChats);
 
