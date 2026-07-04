@@ -29,6 +29,19 @@ Beyond a standard chat interface, **Much** provides a lightweight, local-first f
 
 ---
 
+## 🆚 Much vs. LibreChat: Core Comparison
+
+| Feature | Much (Our App) | LibreChat |
+| :--- | :--- | :--- |
+| **Model Hosting** | Cloud (Gemini, Groq, OpenRouter) & Local (Ollama) | Cloud (OpenAI, Anthropic, Bedrock) & Local (Ollama, llama.cpp) |
+| **Code Interpreter** | **Local-First Wasm**: Runs Python, Pandas, and Matplotlib inside your browser (Pyodide) with zero server load. | **Server-Side**: Requires external Docker containers, sandboxes, and databases (ClickHouse). |
+| **Image Generation** | Stable Diffusion XL (Keyless & Free option) + DALL-E 3 (Paid option). | DALL-E 3 (Paid only) or custom MCP server configurations. |
+| **Vector RAG** | **Local Embeddings**: Files (PDFs, CSVs, TXT) are read and searched locally using browser-based vector matching. | **Server-Side**: Requires hosting an external RAG API container. |
+| **Integrations** | Native Model Context Protocol (MCP) clients for databases and filesystems. | Advanced MCP support, presets, and customized prompt libraries. |
+| **Interface** | Sleek modern bento layout with sun/moon theme triggers. | Standard ChatGPT-style interface with customizable dropdowns. |
+
+---
+
 ## ✨ Features
 
 *   **🖥️ ChatGPT-Inspired Workspace**: A premium interface built with modern glassmorphism, responsive drawers, and global theme triggers.
