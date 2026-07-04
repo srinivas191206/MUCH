@@ -38,23 +38,18 @@ export default function AuthOverlay({ isOpen, onClose, isFullScreen = false }) {
     }
 
     try {
-      let success = false;
       if (isRegister) {
-        success = await signup(email, password);
+        await signup(email, password);
       } else {
-        success = await login(email, password);
+        await login(email, password);
       }
 
-      if (success) {
-        setEmail('');
-        setPassword('');
-        setFullName('');
-        setUsername('');
-        setConfirmPassword('');
-        onClose();
-      } else {
-        setErrorMsg(isRegister ? 'Signup failed. User may already exist.' : 'Login failed. Invalid credentials.');
-      }
+      setEmail('');
+      setPassword('');
+      setFullName('');
+      setUsername('');
+      setConfirmPassword('');
+      onClose();
     } catch (err) {
       setErrorMsg(err.message || 'An unexpected error occurred.');
     } finally {

@@ -186,7 +186,10 @@ export function AppProvider({ children }) {
         body: JSON.stringify({ email, password })
       });
 
-      if (!res.ok) return false;
+      if (!res.ok) {
+        const errorData = await res.json().catch(() => ({}));
+        throw new Error(errorData.error || 'Login failed.');
+      }
       const data = await res.json();
 
       localStorage.setItem('much_auth_token', data.token);
@@ -196,7 +199,7 @@ export function AppProvider({ children }) {
       return true;
     } catch (err) {
       console.error('Login error:', err);
-      return false;
+      throw err;
     }
   };
 
@@ -208,7 +211,10 @@ export function AppProvider({ children }) {
         body: JSON.stringify({ email, password })
       });
 
-      if (!res.ok) return false;
+      if (!res.ok) {
+        const errorData = await res.json().catch(() => ({}));
+        throw new Error(errorData.error || 'Signup failed.');
+      }
       const data = await res.json();
 
       localStorage.setItem('much_auth_token', data.token);
@@ -218,7 +224,7 @@ export function AppProvider({ children }) {
       return true;
     } catch (err) {
       console.error('Signup error:', err);
-      return false;
+      throw err;
     }
   };
 
