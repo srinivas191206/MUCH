@@ -1,0 +1,197 @@
+/* theme.css - Global CSS Variables and Design Tokens for Much */
+
+:root {
+  /* Common typography and transition values */
+  --font-sans: 'Poppins', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-full: 9999px;
+
+  /* Theme-specific fallback values based on prefers-color-scheme */
+  color-scheme: dark light;
+}
+
+/* ==========================================================================
+   Dark Theme (Default Premium AI Workspace Style)
+   ========================================================================== */
+:root,
+html[data-theme="dark"] {
+  --bg-primary: hsl(240, 10%, 4%);
+  --bg-secondary: hsl(240, 10%, 7%);
+  --bg-tertiary: hsl(240, 10%, 10%);
+  --bg-glass: rgba(10, 10, 12, 0.7);
+  --bg-glass-active: rgba(255, 255, 255, 0.05);
+  
+  --border-primary: rgba(255, 255, 255, 0.06);
+  --border-secondary: rgba(255, 255, 255, 0.12);
+  --border-accent: rgba(139, 92, 246, 0.25);
+  
+  --text-primary: hsl(0, 0%, 98%);
+  --text-secondary: hsl(240, 4%, 75%);
+  --text-muted: hsl(240, 4%, 55%);
+  --text-disabled: hsl(240, 4%, 35%);
+
+  --accent-color: hsl(263, 70%, 50%);
+  --accent-hover: hsl(263, 70%, 58%);
+  --accent-glow: rgba(139, 92, 246, 0.15);
+  
+  --accent-cyan: hsl(190, 90%, 50%);
+  --accent-cyan-hover: hsl(190, 90%, 60%);
+  
+  --shadow-premium: 0 12px 40px 0 rgba(0, 0, 0, 0.6);
+  --glass-blur: blur(20px);
+  
+  --scrollbar-thumb: rgba(255, 255, 255, 0.12);
+  --scrollbar-track: transparent;
+}
+
+/* ==========================================================================
+   Light Theme (Clean High-Contrast Fallback Theme)
+   ========================================================================== */
+html[data-theme="light"] {
+  --bg-primary: hsl(0, 0%, 98%);
+  --bg-secondary: hsl(240, 5%, 95%);
+  --bg-tertiary: hsl(240, 5%, 91%);
+  --bg-glass: rgba(255, 255, 255, 0.75);
+  --bg-glass-active: rgba(0, 0, 0, 0.04);
+  
+  --border-primary: rgba(0, 0, 0, 0.08);
+  --border-secondary: rgba(0, 0, 0, 0.15);
+  --border-accent: rgba(139, 92, 246, 0.2);
+  
+  --text-primary: hsl(240, 10%, 4%);
+  --text-secondary: hsl(240, 5%, 35%);
+  --text-muted: hsl(240, 5%, 55%);
+  --text-disabled: hsl(240, 5%, 75%);
+
+  --accent-color: hsl(263, 70%, 48%);
+  --accent-hover: hsl(263, 70%, 40%);
+  --accent-glow: rgba(139, 92, 246, 0.08);
+  
+  --accent-cyan: hsl(190, 90%, 38%);
+  --accent-cyan-hover: hsl(190, 90%, 30%);
+  
+  --shadow-premium: 0 12px 40px 0 rgba(0, 0, 0, 0.05);
+  --glass-blur: blur(20px);
+  
+  --scrollbar-thumb: rgba(0, 0, 0, 0.15);
+  --scrollbar-track: transparent;
+}
+
+/* ==========================================================================
+   Global Resets
+   ========================================================================== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  min-height: 100vh;
+  overflow-y: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color var(--transition-normal), color var(--transition-normal);
+}
+
+input, textarea, button {
+  font-family: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+/* ==========================================================================
+   Scrollbar Styles (Standardized scrollbar properties)
+   ========================================================================== */
+.scroller {
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+  scrollbar-width: thin;
+}
+
+@supports not (scrollbar-color: auto) {
+  .scroller::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  
+  .scroller::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-thumb);
+    border-radius: var(--radius-full);
+  }
+  
+  .scroller::-webkit-scrollbar-track {
+    background: var(--scrollbar-track);
+  }
+}
+
+/* ==========================================================================
+   Glassmorphism Styles
+   ========================================================================== */
+.glass-panel {
+  background: var(--bg-glass);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--border-primary);
+  box-shadow: var(--shadow-premium);
+  transition: background-color var(--transition-normal), border-color var(--transition-normal);
+}
+
+.glass-card {
+  background: var(--bg-glass);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-md);
+  transition: transform var(--transition-fast), border-color var(--transition-fast), background-color var(--transition-fast);
+}
+
+.glass-card:hover {
+  border-color: var(--border-secondary);
+}
+
+/* ==========================================================================
+   Utility Classes & Layouts
+   ========================================================================== */
+.glow-border {
+  border-color: var(--border-accent);
+  box-shadow: 0 0 15px var(--accent-glow);
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-cyan) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.accent-btn {
+  background-color: var(--accent-color);
+  color: white !important;
+  border-radius: var(--radius-md);
+  padding: 8px 16px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: background-color var(--transition-fast), transform var(--transition-fast);
+}
+
+.accent-btn:hover {
+  background-color: var(--accent-hover);
+}
+
+.accent-btn:active {
+  transform: scale(0.98);
+}

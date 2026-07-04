@@ -1,0 +1,16 @@
+HTTP/2 200 
+content-type: image/jpeg
+date: Sat, 04 Jul 2026 02:53:42 GMT
+server: cloudflare
+access-control-allow-origin: *
+cache-control: public, max-age=31536000, immutable
+content-disposition: inline; filename="spiderman.jpg"
+cf-ray: a15ad754db892b4a-MAA
+x-cache-type: EXACT
+x-cache: Miss from cloudfront
+via: 1.1 652b6d91b5fc9393b02e0088092cad28.cloudfront.net (CloudFront)
+x-amz-cf-pop: MAA51-P1
+x-amz-cf-id: JOjCzuiA-aOb43eI9OA40KMSbmJXFA8r1AyfpP05Nn-x92r7AFvw6Q==
+x-content-type-options: nosniff
+vary: Accept-Encoding
+
