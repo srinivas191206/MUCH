@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { X, Cpu, Plus, Trash2, Power, Code, ShieldAlert, RefreshCw, Layers } from 'lucide-react';
 import { useApp } from '../contexts/AppContext';
+import { API_URL } from '../config';
 
 function McpOverlay({ isOpen, onClose }) {
   const { token, user } = useApp();
@@ -25,7 +26,7 @@ function McpOverlay({ isOpen, onClose }) {
     if (!token) return;
     setIsLoading(true);
     try {
-      const res = await fetch('http://localhost:5001/api/mcp/servers', {
+      const res = await fetch(`${API_URL}/api/mcp/servers`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       if (res.ok) {
@@ -51,7 +52,7 @@ function McpOverlay({ isOpen, onClose }) {
   const handleToggle = async (id) => {
     if (!isAdmin) return;
     try {
-      const res = await fetch(`http://localhost:5001/api/mcp/servers/${id}/toggle`, {
+      const res = await fetch(`${API_URL}/api/mcp/servers/${id}/toggle`, {
         method: 'PUT',
         headers: { 'Authorization': `Bearer ${token}` }
       });
@@ -71,7 +72,7 @@ function McpOverlay({ isOpen, onClose }) {
       return;
     }
     try {
-      const res = await fetch(`http://localhost:5001/api/mcp/servers/${id}`, {
+      const res = await fetch(`${API_URL}/api/mcp/servers/${id}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` }
       });
@@ -112,7 +113,7 @@ function McpOverlay({ isOpen, onClose }) {
     }
 
     try {
-      const res = await fetch('http://localhost:5001/api/mcp/servers', {
+      const res = await fetch(`${API_URL}/api/mcp/servers`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -3,6 +3,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { DB } from '../storage/storage';
 import { AIService } from '../services/ai';
+import { API_URL } from '../config';
 
 const AppContext = createContext();
 
@@ -102,7 +103,7 @@ export function AppProvider({ children }) {
       const tokenParam = params.get('token');
       if (tokenParam) {
         try {
-          const res = await fetch('http://localhost:5001/api/auth/me', {
+          const res = await fetch(`${API_URL}/api/auth/me`, {
             headers: { 'Authorization': `Bearer ${tokenParam}` }
           });
           if (res.ok) {
@@ -127,7 +128,7 @@ export function AppProvider({ children }) {
     const fetchUserData = async () => {
       if (!token) return;
       try {
-        const chatsRes = await fetch('http://localhost:5001/api/data/chats', {
+        const chatsRes = await fetch(`${API_URL}/api/data/chats`, {
           headers: { 'Authorization': `Bearer ${token}` }
         });
         if (chatsRes.ok) {
@@ -135,7 +136,7 @@ export function AppProvider({ children }) {
           setChats(serverChats);
         }
 
-        const foldersRes = await fetch('http://localhost:5001/api/data/folders', {
+        const foldersRes = await fetch(`${API_URL}/api/data/folders`, {
           headers: { 'Authorization': `Bearer ${token}` }
         });
         if (foldersRes.ok) {
@@ -143,7 +144,7 @@ export function AppProvider({ children }) {
           setFolders(serverFolders);
         }
 
-        const agentsRes = await fetch('http://localhost:5001/api/agents', {
+        const agentsRes = await fetch(`${API_URL}/api/agents`, {
           headers: { 'Authorization': `Bearer ${token}` }
         });
         if (agentsRes.ok) {
@@ -151,7 +152,7 @@ export function AppProvider({ children }) {
           setAgents(serverAgents);
         }
 
-        const presetsRes = await fetch('http://localhost:5001/api/presets', {
+        const presetsRes = await fetch(`${API_URL}/api/presets`, {
           headers: { 'Authorization': `Bearer ${token}` }
         });
         if (presetsRes.ok) {
@@ -159,7 +160,7 @@ export function AppProvider({ children }) {
           setPresets(serverPresets);
         }
 
-        const memoriesRes = await fetch('http://localhost:5001/api/memories', {
+        const memoriesRes = await fetch(`${API_URL}/api/memories`, {
           headers: { 'Authorization': `Bearer ${token}` }
         });
         if (memoriesRes.ok) {
@@ -179,7 +180,7 @@ export function AppProvider({ children }) {
   // ==========================================================================
   const login = async (email, password) => {
     try {
-      const res = await fetch('http://localhost:5001/api/auth/login', {
+      const res = await fetch(`${API_URL}/api/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password })
@@ -201,7 +202,7 @@ export function AppProvider({ children }) {
 
   const signup = async (email, password) => {
     try {
-      const res = await fetch('http://localhost:5001/api/auth/signup', {
+      const res = await fetch(`${API_URL}/api/auth/signup`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password })
@@ -238,7 +239,7 @@ export function AppProvider({ children }) {
   const createAgent = async (agentData) => {
     if (!token) return null;
     try {
-      const res = await fetch('http://localhost:5001/api/agents', {
+      const res = await fetch(`${API_URL}/api/agents`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -260,7 +261,7 @@ export function AppProvider({ children }) {
   const updateAgent = async (agentId, agentData) => {
     if (!token) return false;
     try {
-      const res = await fetch(`http://localhost:5001/api/agents/${agentId}`, {
+      const res = await fetch(`${API_URL}/api/agents/${agentId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -282,7 +283,7 @@ export function AppProvider({ children }) {
   const deleteAgent = async (agentId) => {
     if (!token) return false;
     try {
-      const res = await fetch(`http://localhost:5001/api/agents/${agentId}`, {
+      const res = await fetch(`${API_URL}/api/agents/${agentId}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` }
       });
@@ -300,7 +301,7 @@ export function AppProvider({ children }) {
   const createPreset = async (presetData) => {
     if (!token) return null;
     try {
-      const res = await fetch('http://localhost:5001/api/presets', {
+      const res = await fetch(`${API_URL}/api/presets`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -322,7 +323,7 @@ export function AppProvider({ children }) {
   const deletePreset = async (presetId) => {
     if (!token) return false;
     try {
-      const res = await fetch(`http://localhost:5001/api/presets/${presetId}`, {
+      const res = await fetch(`${API_URL}/api/presets/${presetId}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` }
       });
@@ -351,7 +352,7 @@ export function AppProvider({ children }) {
   const createMemory = async (content) => {
     if (!token) return null;
     try {
-      const res = await fetch('http://localhost:5001/api/memories', {
+      const res = await fetch(`${API_URL}/api/memories`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -373,7 +374,7 @@ export function AppProvider({ children }) {
   const deleteMemory = async (memoryId) => {
     if (!token) return false;
     try {
-      const res = await fetch(`http://localhost:5001/api/memories/${memoryId}`, {
+      const res = await fetch(`${API_URL}/api/memories/${memoryId}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` }
       });
@@ -393,7 +394,7 @@ export function AppProvider({ children }) {
   const fetchUsers = async () => {
     if (!token) return [];
     try {
-      const res = await fetch('http://localhost:5001/api/admin/users', {
+      const res = await fetch(`${API_URL}/api/admin/users`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       if (res.ok) return await res.json();
@@ -406,7 +407,7 @@ export function AppProvider({ children }) {
   const updateUserRole = async (userId, role) => {
     if (!token) return false;
     try {
-      const res = await fetch(`http://localhost:5001/api/admin/users/${userId}/role`, {
+      const res = await fetch(`${API_URL}/api/admin/users/${userId}/role`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -424,7 +425,7 @@ export function AppProvider({ children }) {
   const updateUserStatus = async (userId, status) => {
     if (!token) return false;
     try {
-      const res = await fetch(`http://localhost:5001/api/admin/users/${userId}/status`, {
+      const res = await fetch(`${API_URL}/api/admin/users/${userId}/status`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -442,7 +443,7 @@ export function AppProvider({ children }) {
   const deleteUser = async (userId) => {
     if (!token) return false;
     try {
-      const res = await fetch(`http://localhost:5001/api/admin/users/${userId}`, {
+      const res = await fetch(`${API_URL}/api/admin/users/${userId}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` }
       });
@@ -456,7 +457,7 @@ export function AppProvider({ children }) {
   const fetchAnalytics = async () => {
     if (!token) return null;
     try {
-      const res = await fetch('http://localhost:5001/api/admin/analytics', {
+      const res = await fetch(`${API_URL}/api/admin/analytics`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       if (res.ok) return await res.json();
@@ -474,7 +475,7 @@ export function AppProvider({ children }) {
 
     if (!token) return;
     try {
-      await fetch('http://localhost:5001/api/data/chats', {
+      await fetch(`${API_URL}/api/data/chats`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -492,7 +493,7 @@ export function AppProvider({ children }) {
 
     if (!token) return;
     try {
-      await fetch(`http://localhost:5001/api/data/chats/${chatId}`, {
+      await fetch(`${API_URL}/api/data/chats/${chatId}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` }
       });
@@ -506,7 +507,7 @@ export function AppProvider({ children }) {
 
     if (!token) return;
     try {
-      await fetch('http://localhost:5001/api/data/folders', {
+      await fetch(`${API_URL}/api/data/folders`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -524,7 +525,7 @@ export function AppProvider({ children }) {
 
     if (!token) return;
     try {
-      await fetch(`http://localhost:5001/api/data/folders/${folderId}`, {
+      await fetch(`${API_URL}/api/data/folders/${folderId}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` }
       });
@@ -697,7 +698,7 @@ export function AppProvider({ children }) {
         // 1. Fetch web search results if active
         if (msg.webSearch) {
           try {
-            const searchRes = await fetch('http://localhost:5001/api/ai/search', {
+            const searchRes = await fetch(`${API_URL}/api/ai/search`, {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
@@ -1290,7 +1291,7 @@ export function AppProvider({ children }) {
         }]
       };
 
-      await fetch('http://localhost:5001/api/data/chats', {
+      await fetch(`${API_URL}/api/data/chats`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -1352,7 +1353,7 @@ export function AppProvider({ children }) {
           }]
         };
 
-        await fetch('http://localhost:5001/api/data/chats', {
+        await fetch(`${API_URL}/api/data/chats`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ShieldCheck, Users, BarChart3, ShieldAlert, ShieldCheck as ShieldCheckIcon, UserMinus, LogOut, RefreshCw, Cpu, Power, Trash2, Plus, Code } from 'lucide-react';
 import { useApp } from '../contexts/AppContext';
+import { API_URL } from '../config';
 
 function AdminDashboardView() {
   const { 
@@ -34,7 +35,7 @@ function AdminDashboardView() {
   const loadMcpServers = async () => {
     if (!token) return;
     try {
-      const res = await fetch('http://localhost:5001/api/mcp/servers', {
+      const res = await fetch(`${API_URL}/api/mcp/servers`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       if (res.ok) {
@@ -122,7 +123,7 @@ function AdminDashboardView() {
   // MCP Control Handlers
   const handleMcpToggle = async (id) => {
     try {
-      const res = await fetch(`http://localhost:5001/api/mcp/servers/${id}/toggle`, {
+      const res = await fetch(`${API_URL}/api/mcp/servers/${id}/toggle`, {
         method: 'PUT',
         headers: { 'Authorization': `Bearer ${token}` }
       });
@@ -141,7 +142,7 @@ function AdminDashboardView() {
       return;
     }
     try {
-      const res = await fetch(`http://localhost:5001/api/mcp/servers/${id}`, {
+      const res = await fetch(`${API_URL}/api/mcp/servers/${id}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` }
       });
@@ -179,7 +180,7 @@ function AdminDashboardView() {
     }
 
     try {
-      const res = await fetch('http://localhost:5001/api/mcp/servers', {
+      const res = await fetch(`${API_URL}/api/mcp/servers`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

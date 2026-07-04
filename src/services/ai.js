@@ -1,5 +1,7 @@
 /* ai.js - Frontend API Gateway Client for Much */
 
+import { API_URL } from '../config.js';
+
 export const AIService = {
   /**
    * Route completion requests to our backend Express stream proxy.
@@ -14,7 +16,7 @@ export const AIService = {
       headers['Authorization'] = `Bearer ${token}`;
     }
 
-    const response = await fetch('http://localhost:5001/api/ai/chat', {
+    const response = await fetch(`${API_URL}/api/ai/chat`, {
       method: 'POST',
       headers,
       body: JSON.stringify({

@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { useNavigate } from 'react-router-dom';
 import { useApp } from '../contexts/AppContext';
+import { API_URL } from '../config';
 import { 
   Paperclip, Search, Compass, Cpu, Mic, ArrowUp, Code, Terminal, Square, X, Image
 } from 'lucide-react';
@@ -211,7 +212,7 @@ function ChatInput({ onSendMessage, defaultProvider, defaultModel }) {
   }, []);
   useEffect(() => {
     if (!token) return;
-    fetch('http://localhost:5001/api/mcp/servers', {
+    fetch(`${API_URL}/api/mcp/servers`, {
       headers: { 'Authorization': `Bearer ${token}` }
     })
       .then(res => res.json())

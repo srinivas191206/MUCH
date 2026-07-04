@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { X, LogIn, UserPlus, LogOut, Mail, Lock, Eye, EyeOff, Sun, Moon } from 'lucide-react';
 import { useApp } from '../contexts/AppContext';
+import { API_URL } from '../config';
 
 export default function AuthOverlay({ isOpen, onClose, isFullScreen = false }) {
   const { user, login, signup, logout, settings, updateTheme } = useApp();
@@ -64,7 +65,7 @@ export default function AuthOverlay({ isOpen, onClose, isFullScreen = false }) {
   const handleSocialLogin = (provider) => {
     setErrorMsg('');
     setLoading(true);
-    window.location.href = `http://localhost:5001/api/auth/${provider.toLowerCase()}`;
+    window.location.href = `${API_URL}/api/auth/${provider.toLowerCase()}`;
   };
 
   const toggleTheme = () => {
