@@ -51,7 +51,7 @@ function ChatPage() {
     // Create session if starting on empty workspace
     if (!targetChatId) {
       targetChatId = createNewChat(null);
-      navigate(`/chat/${targetChatId}`, { replace: true });
+      navigate(`/workspace/chat/${targetChatId}`, { replace: true });
     }
 
     // Query active model completions directly

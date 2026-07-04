@@ -348,9 +348,9 @@ function ChatInput({ onSendMessage, defaultProvider, defaultModel }) {
 
     let targetChatId = currentChatId;
     if (!targetChatId) {
-      targetChatId = createNewChat(null);
-      navigate(`/chat/${targetChatId}`, { replace: true });
-    }
+       targetChatId = createNewChat(null);
+       navigate(`/workspace/chat/${targetChatId}`, { replace: true });
+     }
 
     generateAIImage(targetChatId, promptText, model, aspect);
   };

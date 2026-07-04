@@ -99,7 +99,7 @@ function Sidebar({ isOpen, onClose, onOpenSettings, onOpenAuth, onOpenAgents, on
 
   const handleCreateNewChat = (folderId = null) => {
     const newId = createNewChat(folderId);
-    navigate(`/chat/${newId}`);
+    navigate(`/workspace/chat/${newId}`);
   };
 
   const getProviderIcon = (provider) => {
@@ -169,7 +169,7 @@ function Sidebar({ isOpen, onClose, onOpenSettings, onOpenAuth, onOpenAgents, on
       };
 
       importSingleChat(newChat);
-      navigate(`/chat/${newChat.id}`);
+      navigate(`/workspace/chat/${newChat.id}`);
     } catch (err) {
       console.error('Error importing chat:', err);
       alert('Failed to parse conversation file: ' + err.message);
@@ -271,7 +271,7 @@ function Sidebar({ isOpen, onClose, onOpenSettings, onOpenAuth, onOpenAgents, on
               {favorites.map(chat => (
                 <Link 
                   key={chat.id} 
-                  to={`/chat/${chat.id}`}
+                  to={`/workspace/chat/${chat.id}`}
                   className={`chat-item ${chatId === chat.id ? 'active' : ''}`}
                 >
                   <div style={{ display: 'flex', alignItems: 'center', flex: 1, minWidth: 0 }}>
@@ -408,7 +408,7 @@ function Sidebar({ isOpen, onClose, onOpenSettings, onOpenAuth, onOpenAgents, on
                             </div>
                           ) : (
                             <Link 
-                              to={`/chat/${chat.id}`}
+                              to={`/workspace/chat/${chat.id}`}
                               className={`chat-item ${chatId === chat.id ? 'active' : ''}`}
                               style={{ paddingRight: '60px' }}
                               draggable={true}
@@ -483,7 +483,7 @@ function Sidebar({ isOpen, onClose, onOpenSettings, onOpenAuth, onOpenAgents, on
                   </div>
                 ) : (
                   <Link 
-                    to={`/chat/${chat.id}`}
+                    to={`/workspace/chat/${chat.id}`}
                     className={`chat-item ${chatId === chat.id ? 'active' : ''}`}
                     style={{ paddingRight: '60px' }}
                     draggable={true}
